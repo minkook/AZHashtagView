@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'AZHashtagView_Example' do
+  pod 'AZHashtagView', :path => '../'
+
+  target 'AZHashtagView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
