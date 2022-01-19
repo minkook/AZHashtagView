@@ -60,14 +60,14 @@ class ViewController: UIViewController {
     func setUpHashtagViewCore() {
         
         // button action
-        hashtagView.buttonAction = { tag in
+        hashtagView.tagActionHandler = { tag in
             print("button action - tag: \(tag)")
         }
         
         // expand action
-        hashtagView.expandAction = { [weak self]  isExpand in
+        hashtagView.expandActionHandler = { [weak self] isExpand, displayHeight in
             guard let self = self else { return }
-            self.hashtagViewLayoutConstraintHeight.constant = self.hashtagView.displayHeight
+            self.hashtagViewLayoutConstraintHeight.constant = displayHeight
             
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()

@@ -12,8 +12,8 @@ import UIKit
 @objc
 open class AZHashtagView: UIView {
     
-    // displayLineCount 기본 설정은 무한대
-    // displayLineCount를 설정하지 않는 경우 '확장기능' 없음
+    // displayLineCount - default to UInt.max
+    // displayLineCount - setValue to ExpandMode
     @objc
     public func updateHashtags(_ tags: Array<String>, displayLineCount: UInt = UInt.max, completion: ((_ displayHeight: CGFloat) -> Void)) {
         self.clipsToBounds = true
@@ -25,12 +25,10 @@ open class AZHashtagView: UIView {
     }
     
     
-    // 표시 된 높이
     @objc
     public var displayHeight: CGFloat { get { return _displayHeight } }
     
     
-    // 확장 되었는지 구분
     @objc
     public var isExpand: Bool { get { return _isExpand } }
     
@@ -39,58 +37,56 @@ open class AZHashtagView: UIView {
     //------------------------------------------------------------------------------------
     // MARK: Design
     
-    // 아이템 높이
     @objc
     public var designItemHeight: CGFloat = 36.0
     
     
-    // 아이템 사이의 간격
     @objc
     public var designItemSpacing: CGFloat = 8.0
     
     
-    // 아이템 줄 사이 간격
     @objc
     public var designLineSpacing: CGFloat = 8.0
     
     
-    // 아이템 내의 inset
     @objc
     public var designItemEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: 11, left: 12, bottom: 11, right: 12)
     
     
-    // 아이템 폰트 크기
     @objc
     public var designItemFontSize: CGFloat = 14.0
     
     
-    // 아이템 배경색
     @objc
     public var designItemBackgroundColor: UIColor = .yellow
     
     
-    // 아이템 CornerRadius
     @objc
     public var designItemCornerRadius: CGFloat = 18.0
     
     
-    // '확장기능' 아이템 크기
     @objc
     public var designExpandItemSize: CGSize = CGSize(width: 32.0, height: 32.0)
     
     
+    @objc
+    public var designExpandImage: UIImage?
+    
+    
+    @objc
+    public var designCollapseImage: UIImage?
+    
+    
     
     //------------------------------------------------------------------------------------
-    // MARK: Action
+    // MARK: Action Handler
     
-    // 아이템 선택
     @objc
-    public var buttonAction: ((String) -> Void)?
+    public var tagActionHandler: ((_ tag: String) -> Void)?
     
     
-    // '확장기능' 선택
     @objc
-    public var expandAction: ((Bool) -> Void)?
+    public var expandActionHandler: ((_ isExpand: Bool, _ displayHeight: CGFloat) -> Void)?
     
     
     
@@ -157,6 +153,72 @@ open class AZHashtagView: UIView {
     override open func layoutSubviews() {
         debugLayer.frame = self.bounds
     }
+    
+    private lazy var defaultExpandImage: UIImage = {
+        
+        let size = designExpandItemSize
+        
+        var rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        rect = rect.insetBy(dx: 1, dy: 1)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setFillColor(UIColor.clear.cgColor)
+            context.setStrokeColor(UIColor.blue.cgColor)
+            context.setLineWidth(0.5)
+            
+            context.addEllipse(in: rect)
+            
+            let pt1 = CGPoint(x: rect.midX - rect.midX/3, y: rect.midY - rect.midY/3)
+            let pt2 = CGPoint(x: rect.midX, y: rect.midY + rect.midY/3)
+            let pt3 = CGPoint(x: rect.midX + rect.midX/3, y: rect.midY - rect.midY/3)
+            
+            context.move(to: pt1)
+            context.addLine(to: pt2)
+            context.addLine(to: pt3)
+            
+            context.drawPath(using: .fillStroke)
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image ?? UIImage()
+    }()
+    
+    private lazy var defaultCollapseImage: UIImage = {
+        
+        let size = designExpandItemSize
+        
+        var rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        rect = rect.insetBy(dx: 1, dy: 1)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setFillColor(UIColor.clear.cgColor)
+            context.setStrokeColor(UIColor.blue.cgColor)
+            context.setLineWidth(0.5)
+            
+            context.addEllipse(in: rect)
+            
+            let pt1 = CGPoint(x: rect.midX - rect.midX/3, y: rect.midY + rect.midY/3)
+            let pt2 = CGPoint(x: rect.midX, y: rect.midY - rect.midY/3)
+            let pt3 = CGPoint(x: rect.midX + rect.midX/3, y: rect.midY + rect.midY/3)
+            
+            context.move(to: pt1)
+            context.addLine(to: pt2)
+            context.addLine(to: pt3)
+            
+            context.drawPath(using: .fillStroke)
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image ?? UIImage()
+    }()
     
 }
 
@@ -236,7 +298,7 @@ extension AZHashtagView {
     
     @objc func tagButtonAction(_ sender: UIButton) {
         if let title = sender.title(for: .normal) {
-            if let action = buttonAction {
+            if let action = tagActionHandler {
                 action(title)
             }
         }
@@ -327,8 +389,8 @@ extension AZHashtagView {
     private func createExpandButton() -> UIButton {
         
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "addetail-more"), for: .normal)
-        button.backgroundColor = .green    //~~~
+        let image = designExpandImage ?? defaultExpandImage
+        button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(expandButtonAction), for: .touchUpInside)
         
         return button
@@ -339,17 +401,17 @@ extension AZHashtagView {
         
         hiddenExpandAndLastCollapseButton(true)
         
-        if let action = expandAction {
+        if let action = expandActionHandler {
             _isExpand = true
-            action(isExpand)
+            action(isExpand, displayHeight)
         }
     }
     
     private func createCollapseButton() -> UIButton {
         
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "addetail-more-close"), for: .normal)
-        button.backgroundColor = .green    //~~~
+        let image = designCollapseImage ?? defaultCollapseImage
+        button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(collapseButtonAction), for: .touchUpInside)
         
         return button
@@ -360,9 +422,9 @@ extension AZHashtagView {
         
         hiddenExpandAndLastCollapseButton(false)
         
-        if let action = expandAction {
+        if let action = expandActionHandler {
             _isExpand = false
-            action(isExpand)
+            action(isExpand, displayHeight)
         }
     }
     
