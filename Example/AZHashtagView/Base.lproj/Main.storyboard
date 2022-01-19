@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +19,73 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqu-pa-evz">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOn-Hw-gWw">
+                                        <rect key="frame" x="281" y="0.0" width="79" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Test Button"/>
+                                        <connections>
+                                            <action selector="testButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SvV-Gk-Ulr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <constraints>
+                                    <constraint firstItem="ZOn-Hw-gWw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vqu-pa-evz" secondAttribute="leading" id="0UP-03-kjt"/>
+                                    <constraint firstAttribute="height" constant="50" id="LlJ-bm-a6H"/>
+                                    <constraint firstItem="ZOn-Hw-gWw" firstAttribute="top" secondItem="vqu-pa-evz" secondAttribute="top" id="QXW-1K-Lk7"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZOn-Hw-gWw" secondAttribute="trailing" constant="15" id="VB7-2p-2DV"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZOn-Hw-gWw" secondAttribute="bottom" id="l6d-0p-ljW"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-jM-IrP">
+                                <rect key="frame" x="0.0" y="250" width="375" height="417"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VDk-1x-HJY" customClass="AZHashtagView" customModule="AZHashtagView">
+                                <rect key="frame" x="0.0" y="50" width="375" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="37x-0W-fbR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2ZM-jM-IrP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="1cc-ae-PiK"/>
+                            <constraint firstItem="vqu-pa-evz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="3Mo-dM-K2Z"/>
+                            <constraint firstAttribute="trailing" secondItem="vqu-pa-evz" secondAttribute="trailing" id="3fv-eI-twK"/>
+                            <constraint firstItem="2ZM-jM-IrP" firstAttribute="top" secondItem="VDk-1x-HJY" secondAttribute="bottom" id="KPM-rn-Bt5"/>
+                            <constraint firstAttribute="trailing" secondItem="VDk-1x-HJY" secondAttribute="trailing" id="KhH-FH-R0U"/>
+                            <constraint firstItem="VDk-1x-HJY" firstAttribute="top" secondItem="vqu-pa-evz" secondAttribute="bottom" id="VfH-aa-Bmy"/>
+                            <constraint firstItem="vqu-pa-evz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Wh1-Pq-3mU"/>
+                            <constraint firstItem="VDk-1x-HJY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="wMX-xU-ePF"/>
+                            <constraint firstAttribute="trailing" secondItem="2ZM-jM-IrP" secondAttribute="trailing" id="wR9-k7-swZ"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="2ZM-jM-IrP" secondAttribute="bottom" id="wnl-i5-vDa"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="hashtagView" destination="VDk-1x-HJY" id="0bE-xI-lCa"/>
+                        <outlet property="hashtagViewLayoutConstraintHeight" destination="37x-0W-fbR" id="1wD-g7-MhC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-14" y="111"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
