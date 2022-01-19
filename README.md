@@ -7,7 +7,7 @@
 
 
 <p align="center">
-      <img src="https://user-images.githubusercontent.com/2138712/150086804-2e27c4d8-d53a-49e3-88ac-00732afbb0f1.png" alt="AZImageSlider" title="AZImageSlider">
+    <img src="https://user-images.githubusercontent.com/2138712/150086820-4029afe9-7e6a-4d2f-8c7f-4624139fdcbd.gif" alt="AZImageSlider" title="AZImageSlider">
 </p>
 
 
