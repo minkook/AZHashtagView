@@ -42,11 +42,11 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		A0E91B7D982F3A8056584077 /* Pods_AZHashtagView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AZHashtagView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDC1D6018510C8C4A4B52204 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		BDC1D6018510C8C4A4B52204 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C5073C21B09339B095E9677A /* Pods_AZHashtagView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AZHashtagView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF1410C968FFAEC1C512FAE1 /* Pods-AZHashtagView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AZHashtagView_Example.debug.xcconfig"; path = "Target Support Files/Pods-AZHashtagView_Example/Pods-AZHashtagView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		E149B42CAEFACF30322EFB49 /* AZHashtagView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = AZHashtagView.podspec; path = ../AZHashtagView.podspec; sourceTree = "<group>"; };
-		E60144EBE84F5AFC785D088D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E149B42CAEFACF30322EFB49 /* AZHashtagView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AZHashtagView.podspec; path = ../AZHashtagView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E60144EBE84F5AFC785D088D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +156,6 @@
 				2C0816BF75FAB3C294904F0A /* Pods-AZHashtagView_Tests.debug.xcconfig */,
 				121542BDC63717FFFFE99E15 /* Pods-AZHashtagView_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

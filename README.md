@@ -1,6 +1,6 @@
 # AZHashtagView
 
-[![CI Status](https://img.shields.io/travis/mkyoo/AZHashtagView.svg?style=flat)](https://travis-ci.org/mkyoo/AZHashtagView)
+[![CI Status](https://img.shields.io/travis/minkook/AZHashtagView.svg?style=flat)](https://travis-ci.org/minkook/AZHashtagView)
 [![Version](https://img.shields.io/cocoapods/v/AZHashtagView.svg?style=flat)](https://cocoapods.org/pods/AZHashtagView)
 [![License](https://img.shields.io/cocoapods/l/AZHashtagView.svg?style=flat)](https://cocoapods.org/pods/AZHashtagView)
 [![Platform](https://img.shields.io/cocoapods/p/AZHashtagView.svg?style=flat)](https://cocoapods.org/pods/AZHashtagView)
@@ -22,7 +22,7 @@ pod 'AZHashtagView'
 
 ## Author
 
-mkyoo, manguksmediawill@gmail.com
+minkook, manguks@gmail.com
 
 ## License
 
